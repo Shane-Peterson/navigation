@@ -1,0 +1,291 @@
+/* css reset*/
+* {
+    box-sizing: border-box;
+}
+
+*:before, *:after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+input {
+    outline: none;
+}
+
+/* style */
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1581030063954-8b9c854df9d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60");
+    background-size: cover;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+.globalHeader {
+    margin: 0 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.globalHeader > .imageDoodle {
+    padding: 16px 24px;
+    margin: 40px auto 40px auto;
+    background-color: #1c2238;
+    border-radius: 20px;
+
+}
+
+.imageDoodle > .icon {
+    min-width: 200px;
+    min-height: 80px;
+
+}
+
+.searchForm {
+    position: relative;
+}
+
+.searchForm > .search {
+    height: 44px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+
+}
+
+.searchForm > input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding-left: 52px;
+    padding-right: 44px;
+}
+
+.searchForm > .voiceSearchButton {
+    top: 0;
+    right: 16px;
+}
+
+.searchForm > .container {
+    top: 0;
+    left: 12px;
+}
+
+.globalMain {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 38px;
+}
+
+.siteList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.collect {
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10%;
+    width: 80px;
+
+}
+
+.label > .text {
+    width: 48px;
+}
+
+
+.button {
+    align-items: center;
+}
+
+.site > .delete {
+    display: none;
+}
+
+.site > .delete1 {
+    justify-content: center;
+    background-color: #eee;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 20px;
+    height: 20px;
+
+
+}
+
+.delete1 > .icon {
+    width: 16px;
+    height: 16px;
+    margin: 2px;
+}
+
+.site {
+    position: relative;
+    cursor: pointer;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: #ccc;
+    padding: 8px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+
+}
+
+.icon-wrapper > .icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    font-size: 36px;
+
+}
+
+.text > span {
+    display: flex;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.shake {
+    animation: shake 0.4s linear infinite;
+}
+
+@keyframes scaleBack {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+        width: 5rem;
+    }
+    100% {
+        width: 0;
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: rotateZ(0deg);
+    }
+    20% {
+        transform: rotateZ(-2deg);
+    }
+    40% {
+        transform: rotateZ(0deg);
+    }
+    60% {
+        transform: rotateZ(2deg);
+    }
+    100% {
+        transform: rotateZ(0deg);
+    }
+}
+
+@media (min-width: 500px) {
+    .searchForm {
+        max-width: 562px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .searchForm > input {
+        border-radius: 20px;
+
+    }
+
+    .imageDoodle > .icon {
+        min-width: 400px;
+        min-height: 160px;
+    }
+}
+
+@media (min-width: 500px) {
+    body {
+        background-image: url('https://images.unsplash.com/photo-1590880449155-b54f958ce314?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2029&q=80');
+    }
+
+    .globalMain {
+        margin-top: 40px;
+        max-width: 562px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+@media (min-width: 500px) {
+    .collect {
+        display: none;
+    }
+
+    .icon-wrapper {
+        width: 48px;
+        height: 48px;
+        background-color: #fff;
+        border-radius: 50%;
+        margin-top: 16px;
+        margin-bottom: 0;
+    }
+
+    .icon-wrapper .icon {
+        width: 24px;
+        height: 24px;
+        color: #000;
+        font-size: 16px;
+    }
+
+    .label > .text {
+        height: 42px;
+        padding: 2px 8px 8px 8px;
+        margin-top: 6px;
+    }
+
+    .site > .delete {
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        cursor: default
+    }
+
+    .siteList .label {
+        background-color: transparent;
+        width: 112px;
+    }
+
+    .siteList .label:hover {
+        background-color: rgba(0, 0, 0, 10%);
+    }
+
+    .siteList .site:hover > .delete {
+        display: block;
+    }
+}

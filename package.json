@@ -1,0 +1,9 @@
+{
+  "scripts": {"build": "rm -rf dist && rm -rf .cache && parcel build src/index.html --no-minify --public-url ./"},
+  "name": "navigation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Shane-Peterson/navigation.git",
+  "author": "Shane-Peterson <liuzhelei.hwc@gmail.com>",
+  "license": "MIT"
+}
