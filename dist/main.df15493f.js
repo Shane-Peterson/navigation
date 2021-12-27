@@ -113,6 +113,7 @@ var localData = localStorage.getItem('localData');
 var localDataObject = JSON.parse(localData);
 var hashMap = localDataObject || [{ logo: '#icon-github', url: '//github.com', title: 'Github', logoType: 'svg' }];
 var alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+var sf = void 0;
 var timer = void 0;
 var simplifyUrl = function simplifyUrl(url) {
   return url.replace('https://', '').replace('http://', '').replace('//', '').replace('www.', '').replace(/\/.*/, '').replace(/\..*/, '');
@@ -138,23 +139,21 @@ var render = function render() {
   $siteList.find('li:not(.last)').remove();
   hashMap.forEach(function (node, index) {
     var $li = $('<li>\n      <div class="site label">\n        <div class="icon-wrapper">\n            ' + iconWrapper(node) + '\n        </div>\n        <div class="text"><span>' + node.title + '</span></div>\n          ' + deleteIcon() + '\n      </div>\n    </li>').insertBefore($lastLi);
-    $li.on('click', function () {
-      if (node.logoType === 'text') {
-        node.logoType = 'image';
-      }
-      window.open(node.url, '_self');
-    });
+
     if (isTouchDevice) {
-      $li.on('click', '.delete', function (e) {
+      $li.on('touchstart', '.delete1', function (e) {
         e.stopPropagation();
         $li.css('animation', 'scaleBack 0.4s linear 1 forwards');
         setTimeout(function () {
-          hashMap.splice(0, 1);
+          hashMap.splice(index, 1);
+          storage();
+          render();
         }, 400);
       });
-      $li.on('touchstart', function () {
+      $li.on('touchstart', function (e) {
+        e.preventDefault();
         timer = Date.now();
-        var sf = setTimeout(function () {
+        sf = setTimeout(function () {
           $siteList.find('li:not(.last)').each(function (index, node) {
             node.classList.add('shake');
           });
@@ -165,13 +164,18 @@ var render = function render() {
         timer = Date.now() - timer;
         if (timer < 700) {
           clearTimeout(sf);
+          changeIcon(node);
         }
         timer = 0;
       });
     } else {
+      $li.on('click', function (e) {
+        changeIcon(node);
+      });
       $li.on('click', '.delete', function (e) {
         e.stopPropagation();
         hashMap.splice(index, 1);
+        storage();
         render();
       });
     }
@@ -192,6 +196,7 @@ addButton.on('click', function () {
     }
     var title = simplifyUrl(url);
     hashMap.push({ logo: '' + title[0], url: url, title: title, logoType: 'text' });
+    storage();
     render();
   } catch (error) {}
 });
@@ -209,16 +214,26 @@ $(document).on('keypress', function (e) {
       $siteList.find('li:not(.last)').each(function (i, n) {
         if (i === index) {
           $(n).trigger('click');
+          $(n).trigger('touchstart');
+          $(n).trigger('touchend');
         }
       });
     }
   });
 });
 
-window.onbeforeunload = function () {
+function storage() {
   var string = JSON.stringify(hashMap);
   localStorage.setItem('localData', string);
-};
+}
+
+function changeIcon(node) {
+  if (node.logoType === 'text') {
+    node.logoType = 'image';
+  }
+  storage();
+  window.open(node.url, '_self');
+}
 
 $('.searchForm > input').on('keypress', function (e) {
   e.stopPropagation();
@@ -239,4 +254,4 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.fbd6d07c.map
+//# sourceMappingURL=main.df15493f.map
