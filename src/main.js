@@ -9,6 +9,7 @@ const hashMap = localDataObject || [
   {logo: '#icon-github', url: '//github.com', title: 'Github', logoType: 'svg'}
 ]
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+let sf
 let timer
 const simplifyUrl = (url) => {
   return url.replace('https://', '')
@@ -60,23 +61,22 @@ const render = () => {
           ${deleteIcon()}
       </div>
     </li>`).insertBefore($lastLi)
-    $li.on('click', () => {
-      if (node.logoType === 'text') {
-        node.logoType = 'image'
-      }
-      window.open(node.url, '_self')
-    })
+
     if (isTouchDevice) {
-      $li.on('click', '.delete', (e) => {
-        e.stopPropagation()
-        $li.css('animation', 'scaleBack 0.4s linear 1 forwards')
-        setTimeout(() => {
-          hashMap.splice(0, 1)
-        }, 400)
-      })
-      $li.on('touchstart', () => {
+      $li.on('touchstart', '.delete1', (e) => {
+          e.stopPropagation()
+          $li.css('animation', 'scaleBack 0.4s linear 1 forwards')
+          setTimeout(() => {
+            hashMap.splice(index, 1)
+            storage()
+            render()
+          }, 400)
+        }
+      )
+      $li.on('touchstart', (e) => {
+        e.preventDefault()
         timer = Date.now()
-        let sf = setTimeout(() => {
+        sf = setTimeout(() => {
           $siteList.find('li:not(.last)').each((index, node) => {
             node.classList.add('shake')
           })
@@ -87,13 +87,18 @@ const render = () => {
         timer = Date.now() - timer
         if (timer < 700) {
           clearTimeout(sf)
+          changeIcon(node)
         }
         timer = 0;
       })
     } else {
+      $li.on('click', (e) => {
+        changeIcon(node)
+      })
       $li.on('click', '.delete', (e) => {
         e.stopPropagation()
         hashMap.splice(index, 1)
+        storage()
         render()
       })
     }
@@ -115,6 +120,7 @@ addButton.on('click', () => {
     }
     const title = simplifyUrl(url)
     hashMap.push({logo: `${title[0]}`, url: url, title: title, logoType: 'text'})
+    storage()
     render()
   } catch (error) {
   }
@@ -132,15 +138,25 @@ $(document).on('keypress', (e) => {
       $siteList.find('li:not(.last)').each((i, n) => {
         if (i === index) {
           $(n).trigger('click')
+          $(n).trigger('touchstart')
+          $(n).trigger('touchend')
         }
       })
     }
   })
 })
 
-window.onbeforeunload = () => {
+function storage() {
   const string = JSON.stringify(hashMap)
   localStorage.setItem('localData', string)
+}
+
+function changeIcon(node) {
+  if (node.logoType === 'text') {
+    node.logoType = 'image'
+  }
+  storage()
+  window.open(node.url, '_self')
 }
 
 $('.searchForm > input').on('keypress', (e) => {
