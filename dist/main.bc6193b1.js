@@ -104,6 +104,9 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"epB2":[function(require,module,exports) {
+document.body.style.minWidth = document.documentElement.clientWidth + 'px';
+document.body.style.minHeight = document.documentElement.clientHeight + 'px';
+
 var isTouchDevice = 'ontouchstart' in document.documentElement;
 var $siteList = $('.siteList');
 var $lastLi = $siteList.find('li.last')[1];
@@ -141,7 +144,7 @@ var render = function render() {
     var $li = $('<li>\n      <div class="site label">\n        <div class="icon-wrapper">\n            ' + iconWrapper(node) + '\n        </div>\n        <div class="text"><span>' + node.title + '</span></div>\n          ' + deleteIcon() + '\n      </div>\n    </li>').insertBefore($lastLi);
 
     if (isTouchDevice) {
-      $li.on('touchstart', '.delete1', function (e) {
+      $li.on('touchend', '.delete1', function (e) {
         e.stopPropagation();
         $li.css('animation', 'scaleBack 0.4s linear 1 forwards');
         setTimeout(function () {
@@ -254,4 +257,4 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.df15493f.map
+//# sourceMappingURL=main.bc6193b1.map
