@@ -1,3 +1,6 @@
+document.body.style.minWidth = document.documentElement.clientWidth + 'px'
+document.body.style.minHeight = document.documentElement.clientHeight + 'px'
+
 const isTouchDevice = 'ontouchstart' in document.documentElement
 const $siteList = $('.siteList')
 const $lastLi = $siteList.find('li.last')[1]
@@ -63,7 +66,7 @@ const render = () => {
     </li>`).insertBefore($lastLi)
 
     if (isTouchDevice) {
-      $li.on('touchstart', '.delete1', (e) => {
+      $li.on('touchend', '.delete1', (e) => {
           e.stopPropagation()
           $li.css('animation', 'scaleBack 0.4s linear 1 forwards')
           setTimeout(() => {
