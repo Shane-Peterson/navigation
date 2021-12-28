@@ -68,12 +68,12 @@ const render = () => {
     if (isTouchDevice) {
       $li.on('touchend', '.delete1', (e) => {
           e.stopPropagation()
-          $li.css('animation', 'scaleBack 0.4s linear 1 forwards')
+          $li.css('animation', 'scaleBack 0.65s linear 1 forwards')
           setTimeout(() => {
             hashMap.splice(index, 1)
             storage()
             render()
-          }, 400)
+          }, 650)
         }
       )
       $li.on('touchstart', (e) => {

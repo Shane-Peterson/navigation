@@ -146,12 +146,12 @@ var render = function render() {
     if (isTouchDevice) {
       $li.on('touchend', '.delete1', function (e) {
         e.stopPropagation();
-        $li.css('animation', 'scaleBack 0.4s linear 1 forwards');
+        $li.css('animation', 'scaleBack 0.65s linear 1 forwards');
         setTimeout(function () {
           hashMap.splice(index, 1);
           storage();
           render();
-        }, 400);
+        }, 650);
       });
       $li.on('touchstart', function (e) {
         e.preventDefault();
@@ -257,4 +257,4 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.bc6193b1.map
+//# sourceMappingURL=main.b61dc0d6.map
