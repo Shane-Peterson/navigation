@@ -1,7 +1,9 @@
+const isTouchDevice = 'ontouchstart' in document.documentElement
+if (isTouchDevice) {
 document.body.style.minWidth = document.documentElement.clientWidth + 'px'
 document.body.style.minHeight = document.documentElement.clientHeight + 'px'
+}
 
-const isTouchDevice = 'ontouchstart' in document.documentElement
 const $siteList = $('.siteList')
 const $lastLi = $siteList.find('li.last')[1]
 const randomButton = $('.randomButton')

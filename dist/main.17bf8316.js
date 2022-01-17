@@ -104,10 +104,12 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   // Override the current require with this new one
   return newRequire;
 })({"epB2":[function(require,module,exports) {
-document.body.style.minWidth = document.documentElement.clientWidth + 'px';
-document.body.style.minHeight = document.documentElement.clientHeight + 'px';
-
 var isTouchDevice = 'ontouchstart' in document.documentElement;
+if (isTouchDevice) {
+  document.body.style.minWidth = document.documentElement.clientWidth + 'px';
+  document.body.style.minHeight = document.documentElement.clientHeight + 'px';
+}
+
 var $siteList = $('.siteList');
 var $lastLi = $siteList.find('li.last')[1];
 var randomButton = $('.randomButton');
@@ -257,4 +259,4 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 },{}]},{},["epB2"], null)
-//# sourceMappingURL=main.feacc910.map
+//# sourceMappingURL=main.17bf8316.map
